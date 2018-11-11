@@ -1,9 +1,12 @@
 package com.example.jangid.androidutilsexample;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,8 +19,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.example.jangid.androidutilsexample.Adapter.DataAdapter;
@@ -77,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final int REQUEST_IMAGE_CAPTURE = 1;
     final int REQUEST_GALLERY_CAPTURE = 2;
 
+    @BindView(R.id.button_popup)
+    Button button_popup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_toro.setOnClickListener(this);
         button_trimvideo.setOnClickListener(this);
         button_file_upload.setOnClickListener(this);
+        button_popup.setOnClickListener(this);
     }
 
     private void uploadFile(String userid, File file) {
@@ -166,13 +178,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == button_file_upload) {
             try {
                 Done("http://pr07002.searchnative.com/api/challenge/company_challenge",
-                        "96","TEST","test","04-11-2018","05-11-2018",
-                        "qDgaSnnAwPpt061S1OnTeinE46qNxRMREQjCGXiD",path);
+                        "96", "TEST", "test", "04-11-2018", "05-11-2018",
+                        "qDgaSnnAwPpt061S1OnTeinE46qNxRMREQjCGXiD", path);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        } else if(v == button_popup){
+            int[] location = new int[2];
+            button_popup.getLocationOnScreen(location);
+            int x = location[0];
+            int y = location[1];
+            Point point = new Point();
+            point.x = x;
+            point.y = y;
+            showSortPopup(MainActivity.this,point,button_popup);
         }
     }
 
@@ -190,6 +211,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+    }
+
+    private void showSortPopup(final Context context, Point p,Button btn)
+    {
+        // Inflate the popup_layout.xml
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.custom_popup, null);
+
+        // Creating the PopupWindow
+        PopupWindow changeSortPopUp = new PopupWindow(context);
+        changeSortPopUp.setContentView(layout);
+        changeSortPopUp.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeSortPopUp.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeSortPopUp.setFocusable(true);
+
+        // Some offset to align the popup a bit to the left, and a bit down, relative to button's position.
+        int OFFSET_X = -100;
+        int OFFSET_Y = 0;
+
+        // Clear the default translucent background
+        changeSortPopUp.setBackgroundDrawable(new BitmapDrawable());
+
+        // Displaying the popup at the specified location, + offsets.
+        changeSortPopUp.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
+
+
     }
 
     private void SelectFile() {
