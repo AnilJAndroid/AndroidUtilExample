@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.OneFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/trimevideo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Trim Video"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:visibility="gone"/>
+
+
+    <life.knowledge4.videotrimmer.K4LVideoTrimmer
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/timeLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+</FrameLayout>

@@ -1,0 +1,1 @@
+include ':app', ':toro-core', ':toro-exoplayer', ':exoplayer-ui', ':exoplayer-core', ':k4l-video-trimmer', ':uploadservice', ':uploadservice-okhttp'
