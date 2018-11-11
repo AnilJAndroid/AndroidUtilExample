@@ -147,8 +147,7 @@
             android:layout_marginTop="152dp"
             android:text="Popup"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_con
-            straintRight_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 

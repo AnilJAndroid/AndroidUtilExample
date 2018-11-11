@@ -13,24 +13,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".events.UploadReceiver" android:exported="false">
+        <receiver
+            android:name=".events.UploadReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="net.gotev.uploadservicedemo.uploadservice.broadcast.status" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name=".events.NotificationActionsReceiver" android:exported="false">
+        <receiver
+            android:name=".events.NotificationActionsReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="net.gotev.uploadservicedemo.notification.action" />
             </intent-filter>
         </receiver>
 
         <activity android:name=".MainActivity">
+<!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+-->
         </activity>
         <activity
             android:name=".navigationmenu"
@@ -41,7 +46,14 @@
         <activity
             android:name=".ToroActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".VideoTrimmerActivity"></activity>
+        <activity android:name=".VideoTrimmerActivity" />
+        <activity android:name=".ExoPlayerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
